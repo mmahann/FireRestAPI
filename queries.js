@@ -22,7 +22,7 @@ module.exports = {
   getSingleFire: getSingleFire,
   createFire: createFire,
   updateFire: updateFire,
-  removeFire: removeFire
+  removeFire: removeFire,
 };
 
 
