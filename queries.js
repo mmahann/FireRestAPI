@@ -156,6 +156,8 @@ function createFire(req, res, next){
 
 function updateFire(req, res, next){
   console.log("Trying to update Fire");
+  console.log(req.params.id);
+  console.log(JSON.stringify(req.body.exttime));
   var fireID = parseInt(req.params.id);
   var parsedExtTime = parseTimeMark(req.body.exttime);
   console.log("parsed the variables, fireID: "+ fireID + 
