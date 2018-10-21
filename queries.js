@@ -155,14 +155,14 @@ function createFire(req, res, next){
 }
 
 function updateFire(req, res, next){
-  console.log("Trying to update Fire");
   var fireID = parseInt(req.params.id);
   var parsedExtTime = parseTimeMark(req.body.exttime);
-  console.log("parsed the variables, fireID: "+ fireID + 
-  " and parsedExtTime: "+ parsedExtTime.dateTime);
-  db.none("update public.fire set fire_extinguished = (to_timestamp($1, 'YYYY-MM-DD HH24:MI:SS')) WHERE fid = $2", [parsedExtTime.dateTime, fireID])
+  var lat = parseFloat(req.body.lat);
+  var lon = parseFloat(req.body.lon);
+  var alt = parseFloat(req.body.alt);
+  var verified = req.body.verified;
+  db.none("update public.fire set fire_lat = $1, fire_lon = $2, fire_alt = $3, fire_verified = $4, fire_extinguished = (to_timestamp($5, 'YYYY-MM-DD HH24:MI:SS')) WHERE fid = $6", [lat, lon, alt, verified, parsedExtTime.dateTime, fireID])
   .then(function (){
-    console.log("callback initiated");
     res.status(200)
     .json({
       status: 'success',
